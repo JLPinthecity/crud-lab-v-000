@@ -8,7 +8,6 @@ import { createStore } from 'redux';
 
 const store = createStore(manageRestaurant);
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

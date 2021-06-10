@@ -1,30 +1,39 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 class RestaurantInput extends Component {
+
   state = {
-    name: ""
+    text: ''
   }
 
-  handleChange = (event) =>{
-    this setState({
+  handleOnChange = event => {
+    this.setState({
       [event.target.name]: event.target.value
-    });
+    })
   }
- 
+
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.addRestaurant(this.state.text)
+    this.setState({
+      text: ''
+    })
+  }
+
   render() {
     return (
       <div>
-        <form onChange={(event) => this.handleChange(event)}>
-          <input type="text" name="name" value={this.state.name} />
+        <form onSubmit={this.handleSubmit}>
+          <label>Restaurant Name: </label>
+          <input type="text" name="text" onChange={this.handleOnChange} value={this.state.text} />
           <input type="submit" />
         </form>
       </div>
     );
   }
-
 };
 
-export default connect()(RestaurantInput);
+export default RestaurantInput;
 
-//our form should have two inputs: a text input to enter the name of the rest, and an input with type equal submit
+//our form should have two inputs: a text input to enter the name of the rest, 
+//and an input with type equal submit
